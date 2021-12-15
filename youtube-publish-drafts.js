@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Youtube publish drafts
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/kubo25/youtube-publish-drafts
 // @version      0.1
 // @description  Publish all drafts
 // @author       Niedzwiedzw, kubo25
