@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Youtube publish drafts
 // @namespace    https://github.com/kubo25/youtube-publish-drafts
-// @version      0.1
+// @version      0.2
+// @updateURL    https://raw.githubusercontent.com/kubo25/youtube-publish-drafts/master/youtube-publish-drafts.js
+// @downloadURL  https://raw.githubusercontent.com/kubo25/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
 // @author       Niedzwiedzw, kubo25
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
