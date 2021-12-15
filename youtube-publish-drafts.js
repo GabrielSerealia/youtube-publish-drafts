@@ -1,5 +1,18 @@
-(() => {
-    // -----------------------------------------------------------------
+// ==UserScript==
+// @name         Youtube publish drafts
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  Publish all drafts
+// @author       Niedzwiedzw, kubo25
+// @icon         https://www.google.com/s2/favicons?domain=youtube.com
+// @grant        none
+// @match        https://studio.youtube.com/channel/*/videos/upload*
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+     // -----------------------------------------------------------------
     // CONFIG (you're safe to edit this)
     // -----------------------------------------------------------------
     // ~ GLOBAL CONFIG
@@ -264,7 +277,7 @@
         }
 
         async anyMenuItem() {
-            const item =  await waitForElement(SORTING_ITEM_MENU_ITEM_SELECTOR, this.raw);
+            const item = await waitForElement(SORTING_ITEM_MENU_ITEM_SELECTOR, this.raw);
             if (item === null) {
                 throw new Error("could not locate any menu item");
             }
@@ -329,11 +342,68 @@
     // ----------------------------------
     // ENTRY POINT
     // ----------------------------------
-    ({
+    /*({
         'publish_drafts': publishDrafts,
         'sort_playlist': sortPlaylist,
-    })[MODE]();
+    })[MODE]();*/
 
+    const run = () => {
+        ({
+            'publish_drafts': publishDrafts,
+            'sort_playlist': sortPlaylist,
+        })[MODE]();
+    };
 
+    (async () => {
+        const titleEl = await waitForElement('#page-title-container', document);
+        titleEl.style.justifyContent = 'space-between';
+
+        const button = document.createElement('button')
+        button.textContent = 'Publish Drafts';
+
+        Object.assign(button.style, {
+            marginRight: '32px',
+            marginTop: '23px',
+            color: 'var(--ytcp-call-to-action)',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            fontFamily: 'var(--ytcp-font-button_-_font-family)',
+            fontSize: 'var(--ytcp-font-button_-_font-size)',
+            fontWeight: 'var(--ytcp-font-button_-_font-weight)',
+            textTransform: 'uppercase',
+            padding: '1rem',
+        })
+
+        button.addEventListener('click', run);
+
+        button.addEventListener('mouseenter', () => {
+            button.style.background = 'var(--ytcp-video-row-highlighted,var(--ytcp-general-background-a))'
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.background = 'none';
+        })
+
+        let buttonAdded = false;
+
+        const toggleButton = () => {
+            const isVideoList = window.location.href.includes('/videos/upload');
+            if (!buttonAdded && isVideoList) {
+                titleEl.append(button);
+                buttonAdded = true;
+                return
+            } else if (buttonAdded && !isVideoList) {
+                button.remove();
+                buttonAdded = false;
+                return
+            }
+        }
+
+        const observer = new MutationObserver(toggleButton);
+
+        observer.observe(titleEl, { subtree: true, childList: true });
+
+        toggleButton();
+    })()
 })();
-
