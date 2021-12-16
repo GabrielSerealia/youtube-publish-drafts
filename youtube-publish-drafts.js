@@ -8,7 +8,7 @@
 // @author       Niedzwiedzw, kubo25
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
-// @match        https://studio.youtube.com/channel/*/videos/upload*
+// @match        https://studio.youtube.com/*
 // ==/UserScript==
 
 (function() {
