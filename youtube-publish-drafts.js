@@ -2,8 +2,8 @@
 // @name         Youtube publish drafts
 // @namespace    https://github.com/kubo25/youtube-publish-drafts
 // @version      0.2.1
-// @updateURL    https://raw.githubusercontent.com/kubo25/youtube-publish-drafts/master/youtube-publish-drafts.js
-// @downloadURL  https://raw.githubusercontent.com/kubo25/youtube-publish-drafts/master/youtube-publish-drafts.js
+// @updateURL    https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
+// @downloadURL  https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
 // @author       Niedzwiedzw, kubo25
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
@@ -25,7 +25,7 @@
     // ~ PUBLISH CONFIG
     // -----------------------------------------------------------------
     const MADE_FOR_KIDS = false; // true / false;
-    const VISIBILITY = 'Public'; // 'Public' / 'Private' / 'Unlisted'
+    const VISIBILITY = 'Private'; // 'Public' / 'Private' / 'Unlisted'
     // -----------------------------------------------------------------
     // ~ SORT PLAYLIST CONFIG
     // -----------------------------------------------------------------
