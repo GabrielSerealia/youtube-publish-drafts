@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube publish drafts
 // @namespace    https://github.com/kubo25/youtube-publish-drafts
-// @version      0.2.3
+// @version      0.2.4
 // @updateURL    https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @downloadURL  https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
@@ -177,6 +177,10 @@
             const success = new SuccessDialog(dialogElement);
             return success;
         }
+        async savePrivate() {
+            click(await this.saveButton());
+            debugLog('saved private');
+        }
     }
 
     class DraftModal {
@@ -258,8 +262,14 @@
             await draft.selectMadeForKids();
             const visibility = await draft.goToVisibility();
             await visibility.setVisibility();
-            const dialog = await visibility.save();
-            await dialog.close();
+            if (VISIBILITY == 'Private') {
+                debugLog('video is private using savePrivate');
+                await visibility.savePrivate();
+                await sleep(1000);
+            } else {
+                const dialog = await visibility.save();
+                await dialog.close();
+            }
             await sleep(100);
         }
     }
