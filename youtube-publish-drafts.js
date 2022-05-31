@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube publish drafts
 // @namespace    https://github.com/kubo25/youtube-publish-drafts
-// @version      0.2.4
+// @version      0.2.5
 // @updateURL    https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @downloadURL  https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
