@@ -5,7 +5,7 @@
 // @updateURL    https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @downloadURL  https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
-// @author       Niedzwiedzw, kubo25
+// @author       Niedzwiedzw, kubo25, GabrielSerealia
 // @icon         https://www.google.com/s2/favicons?domain=youtube.com
 // @grant        none
 // @match        https://studio.youtube.com/*
