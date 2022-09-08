@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube publish drafts
 // @namespace    https://github.com/kubo25/youtube-publish-drafts
-// @version      0.2.5
+// @version      0.2.6
 // @updateURL    https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @downloadURL  https://raw.githubusercontent.com/GabrielSerealia/youtube-publish-drafts/master/youtube-publish-drafts.js
 // @description  Publish all drafts
@@ -92,6 +92,26 @@
         return null;
     }
 
+    async function waitForElementNull(selector, baseEl, timeoutMs) {
+        if (timeoutMs === undefined) {
+            timeoutMs = DEFAULT_ELEMENT_TIMEOUT_MS;
+        }
+        if (baseEl === undefined) {
+            baseEl = document;
+        }
+        let timeout = timeoutMs;
+        while (timeout > 0) {
+            let element = baseEl.querySelector(selector);
+            if (element === null) {
+                return element;
+            }
+            await sleep(TIMEOUT_STEP_MS);
+            timeout -= TIMEOUT_STEP_MS;
+        }
+        debugLog(`${selector} continues to exist inside`, baseEl);
+        return null;
+    }
+
     function click(element) {
         const event = document.createEvent('MouseEvents');
         event.initMouseEvent('mousedown', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -166,6 +186,9 @@
         async isSaved() {
             await waitForElement(SUCCESS_ELEMENT_SELECTOR, document);
         }
+        async isSavedPrivate() {
+            await waitForElementNull(DRAFT_MODAL_SELECTOR, document);
+        }
         async dialog() {
             return await waitForElement(DIALOG_SELECTOR);
         }
@@ -179,6 +202,7 @@
         }
         async savePrivate() {
             click(await this.saveButton());
+            await this.isSavedPrivate();
             debugLog('saved private');
         }
     }
@@ -265,7 +289,6 @@
             if (VISIBILITY == 'Private') {
                 debugLog('video is private using savePrivate');
                 await visibility.savePrivate();
-                await sleep(1000);
             } else {
                 const dialog = await visibility.save();
                 await dialog.close();
